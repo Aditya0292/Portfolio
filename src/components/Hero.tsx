@@ -108,7 +108,7 @@ export default function Hero() {
                         initial={{ y: 100, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                        className="absolute bottom-0 left-[52%] -translate-x-1/2 w-[80vw] md:w-[40vw] h-[60vh] md:h-[85vh] z-10"
+                        className="absolute bottom-0 left-[52%] -translate-x-1/2 w-[80vw] md:w-[40vw] h-[60vh] md:h-[85vh] z-10 will-change-transform"
                     >
                         {/* Glow Effect */}
                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vh] bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.15)_0%,transparent_70%)] blur-[60px] -z-10 pointer-events-none" />
