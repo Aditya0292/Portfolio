@@ -9,6 +9,13 @@ export default function Preloader() {
     const [isVisible, setIsVisible] = useState(true);
 
     useEffect(() => {
+        // Check if preloader has already run in this session
+        const hasLoaded = sessionStorage.getItem("hasLoaded");
+        if (hasLoaded) {
+            setIsVisible(false);
+            return;
+        }
+
         const duration = 4500; // 4.5 seconds
         const interval = 30;
         const steps = duration / interval;
@@ -19,7 +26,10 @@ export default function Preloader() {
                 const next = prev + increment;
                 if (next >= 100) {
                     clearInterval(timer);
-                    setTimeout(() => setIsVisible(false), 800);
+                    setTimeout(() => {
+                        setIsVisible(false);
+                        sessionStorage.setItem("hasLoaded", "true");
+                    }, 800);
                     return 100;
                 }
                 return next;
@@ -28,6 +38,11 @@ export default function Preloader() {
 
         return () => clearInterval(timer);
     }, []);
+
+    // If invisible and loaded, return null to avoid exit animation loop
+    if (!isVisible && typeof window !== 'undefined' && sessionStorage.getItem("hasLoaded")) {
+        return null;
+    }
 
     return (
         <AnimatePresence>

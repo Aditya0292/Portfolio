@@ -14,6 +14,7 @@ const poppins = Poppins({
 const navLinks = [
     { name: "Home", href: "#" },
     { name: "Work", href: "#work" },
+    { name: "Education", href: "#education" },
     { name: "Contact", href: "#contact" },
 ];
 

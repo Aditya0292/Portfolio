@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
+import Preloader from "@/components/Preloader";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair-display",
@@ -32,6 +33,7 @@ export default function RootLayout({
       <body
         className={`${playfair.variable} ${inter.variable} antialiased bg-background text-foreground`}
       >
+        <Preloader />
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
