@@ -114,7 +114,7 @@ export default function Hero() {
                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vh] bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.15)_0%,transparent_70%)] blur-[60px] -z-10 pointer-events-none" />
 
                         <Image
-                            src="/hero-image.png"
+                            src="/hero-image-new.png"
                             alt="Aditya Havaldar"
                             fill
                             quality={100}
