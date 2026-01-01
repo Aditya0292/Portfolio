@@ -28,7 +28,7 @@ export default function ParallaxGallery() {
     const x3 = useTransform(scrollYProgress, [0, 1], ["-25%", "25%"]);
 
     return (
-        <div ref={containerRef} className="absolute inset-0 overflow-hidden opacity-30 pointer-events-none bg-black">
+        <div ref={containerRef} className="absolute inset-0 overflow-hidden opacity-40 pointer-events-none bg-black">
             <div className="flex flex-col justify-center gap-4 md:gap-10 h-full py-10">
                 <ParallaxRow x={x1} images={images.slice(0, 5)} />
                 <ParallaxRow x={x2} images={images.slice(2, 7)} />
@@ -47,7 +47,7 @@ function ParallaxRow({ x, images }: { x: MotionValue<string>; images: string[] }
             {[...images, ...images, ...images].map((src, index) => (
                 <div
                     key={index}
-                    className="relative w-[200px] h-[15vh] md:w-[400px] md:h-[25vh] rounded-xl overflow-hidden brightness-[0.6] hover:brightness-100 transition-all duration-500 shrink-0 border border-white/10"
+                    className="relative w-[35vw] h-[30vh] md:w-[400px] md:h-[25vh] rounded-xl overflow-hidden brightness-[0.7] hover:brightness-100 transition-all duration-500 shrink-0 border border-white/10"
                 >
                     <Image
                         src={src}

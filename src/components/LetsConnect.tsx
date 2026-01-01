@@ -42,16 +42,18 @@ export default function LetsConnect() {
             if (!canvasRef.current) return;
 
             const isMobile = window.innerWidth < 768;
+            const dpr = isMobile ? 1 : 2;
+            width = canvasRef.current.offsetWidth;
 
             globeRef.current = createGlobe(canvasRef.current, {
-                devicePixelRatio: isMobile ? 1 : 2,
-                width: 600 * 2,
-                height: 600 * 2,
+                devicePixelRatio: dpr,
+                width: width * dpr,
+                height: width * dpr,
                 phi: 0,
                 theta: 0,
                 dark: 1,
                 diffuse: 1.2,
-                mapSamples: isMobile ? 9000 : 16000,
+                mapSamples: isMobile ? 8000 : 16000,
                 mapBrightness: 6,
                 baseColor: [1, 1, 1],
                 markerColor: [0.1, 0.8, 1],
@@ -62,8 +64,8 @@ export default function LetsConnect() {
                 onRender: (state) => {
                     state.phi = phi;
                     phi += 0.005;
-                    state.width = width * 2;
-                    state.height = width * 2;
+                    state.width = width * dpr;
+                    state.height = width * dpr;
                 },
             });
         }, 100);
