@@ -19,6 +19,17 @@ const navLinks = [
 ];
 
 export default function Navbar() {
+    const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, href: string) => {
+        e.preventDefault();
+        const targetId = href.replace("#", "");
+        const elem = document.getElementById(targetId);
+        if (elem) {
+            elem.scrollIntoView({ behavior: "smooth" });
+        } else if (href === "#") {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+    };
+
     return (
         <motion.div
             initial={{ y: -100, opacity: 0 }}
@@ -48,6 +59,7 @@ export default function Navbar() {
                         <Link
                             key={index}
                             href={link.href}
+                            onClick={(e) => handleScroll(e, link.href)}
                             className="text-sm text-neutral-400 hover:text-white transition-colors duration-300 font-medium"
                         >
                             {link.name}
@@ -57,10 +69,12 @@ export default function Navbar() {
 
                 {/* CTA Button */}
                 <div className="flex justify-end">
-                    <Link href="#contact">
-                        <button className="bg-[#1a1a1a] hover:bg-[#222] text-white text-xs md:text-sm font-medium px-4 py-2 md:px-6 md:py-2.5 rounded-full border border-white/10 transition-colors duration-300">
-                            Let&apos;s Connect
-                        </button>
+                    <Link
+                        href="#contact"
+                        onClick={(e) => handleScroll(e, "#contact")}
+                        className="bg-[#1a1a1a] hover:bg-[#222] text-white text-xs md:text-sm font-medium px-4 py-2 md:px-6 md:py-2.5 rounded-full border border-white/10 transition-colors duration-300"
+                    >
+                        Let&apos;s Connect
                     </Link>
                 </div>
             </div>
