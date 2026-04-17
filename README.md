@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# [ ( / ) ADITYA HAVALDAR ]
+### Institutional AI Portfolio & Intelligence OS
 
-## Getting Started
+[![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white)](https://www.framer.com/motion/)
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🏛️ Project Vision
+A high-fidelity, interactive portfolio designed with a **"Liquid Glass" Institutional Identity**. This project transcends traditional personal sites by implementing a custom design system focused on motion-based storytelling, tactile interactions, and a premium "Military-Grade" aesthetic.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 💎 Interactive Highlights
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 🔦 Spotlight Mask Reveal & Smoky Heat Glow
+The Hero section features a hardware-accelerated **Spotlight Interaction**.
+- **The Concept**: Your name starts as a subtle, low-opacity outline in the background.
+- **The Reveal**: Moving the cursor reveals a heavy **Brushed Metal texture** inside the letters using CSS masking.
+- **The Polish**: An underlying **Smoky Orange Heat Glow** follows the cursor, creating the illusion of a glowing ember passing over cold steel.
 
-## Learn More
+### 🔄 Infinite Achievement Marquee
+The "Education & Achievements" section is optimized for space efficiency and visual flow.
+- **Motion**: A vertical, infinite-looping marquee powered by `framer-motion`.
+- **Engagement**: Pauses on hover for readability.
+- **Aesthetic**: Integrated with custom gradient masks for a seamless fade into the "Liquid Glass" background.
 
-To learn more about Next.js, take a look at the following resources:
+### 🧪 Design Philosophy: "Liquid Glass"
+The entire OS is built on a custom tokens:
+- **Materials**: High-blur backdrops, subtle noise textures, and semi-transparent "glass" cards.
+- **Motion**: Spring-based physics for all interactions (Damping: 30, Stiffness: 200).
+- **Colors**: Deep institutional blacks, cold metallic whites, and focused AI-orange accents.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🚀 Projects Showcased
 
-## Deploy on Vercel
+### 🛡️ [Apex Trade AI](https://github.com/Aditya0292/Apex-Trade-AI)
+*Institutional-Grade Intelligence Dashboard*
+- Real-time heatmaps, tactical data layers, and quantitative trading metrics.
+- High-performance WebGL rendering.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 🧠 [NeuroFlow](https://github.com/Aditya0292/NeuroFLow-Edutech)
+*AI-Powered ML Learning OS (VIBETHON AI 3rd Place)*
+- Personalized roadmaps and sandboxed Python execution for ML education.
+- Interactive algorithmic visualizers.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🛠️ Technical Implementation
+
+### Key Technologies
+- **Core**: Next.js 14 (App Router), TypeScript
+- **Styling**: Tailwind CSS (Custom Design System)
+- **Animation**: Framer Motion (useTransform, useSpring, useMotionValue)
+- **Deployment**: Vercel
+
+### Installation & Local Setup
+
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/Aditya0292/Portfolio.git
+   cd Portfolio
+   ```
+
+2. **Install Dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Environment Setup**
+   Create a `.env.local` file for any necessary API keys (if applicable).
+
+4. **Launch Dev Server**
+   ```bash
+   npm run dev
+   ```
+
+---
+
+## 📬 Intelligence & Tactics
+- **GitHub**: [@Aditya0292](https://github.com/Aditya0292)
+- **Status**: ACTIVE — Open for high-stakes AI & UI engineering collaborations.
+
+---
+
+*( / ) Designed for Digital Sovereignty.*

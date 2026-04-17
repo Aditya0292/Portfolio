@@ -194,7 +194,7 @@ export default function LetsConnect() {
                                 <div className="space-y-4">
                                     <label className="text-xs font-medium text-neutral-400 uppercase tracking-wider">Your Requirement</label>
                                     <div className="flex flex-wrap gap-3">
-                                        {["Website", "Landing Pages", "UI Designs", "Data Analyze"].map((req) => (
+                                        {["WEBSITES", "AI", "UI DESIGNS", "OTHERS"].map((req) => (
                                             <button
                                                 key={req}
                                                 type="button"

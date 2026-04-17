@@ -6,30 +6,37 @@ import { useState } from "react";
 
 const projects = [
     {
-        title: "APEX Trade AI",
-        category: "FinTech / LLMs",
-        stack: ["Python", "Market APIs", "LLMs"],
+        title: "NeuroFlow",
+        category: "EdTech / AI",
+        stack: ["Next.js 14", "TypeScript", "Tailwind CSS", "Gemini 2.0"],
         description:
-            "AI-assisted market intelligence system for XAUUSD & Forex markets. Uses macro sentiment analysis and risk logic for high-confidence trading.",
+            "Immersive AI-powered learning OS for ML with 'Liquid Glass' design and sandboxed Python execution.",
+    },
+    {
+        title: "APEX Trade AI",
+        category: "FinTech / AI",
+        stack: ["Python", "TensorFlow", "Web3.py", "Next.js"],
+        description:
+            "Production-grade algorithmic trading system utilizing a 4-model ML ensemble and blockchain-verified performance ledger.",
     },
     {
         title: "MetaLearn AI",
         category: "EdTech / PWA",
-        stack: ["React.js", "Supabase", "Next.js"],
+        stack: ["Next.js", "OpenAI", "Supabase", "PWA"],
         description:
             "AI-powered learning platform focusing on personalized learning flows. Features session-based logic and cross-platform PWA architecture.",
     },
     {
         title: "AI Virtual Try-On",
         category: "Computer Vision",
-        stack: ["React.js", "Python", "Supabase"],
+        stack: ["OpenCV", "PyTorch", "React Three Fiber"],
         description:
-            "Real-time virtual try-on system using image-based inference. Seamless frontend AI pipeline integration.",
+            "Real-time virtual try-on system using image-based inference and WebGL rendering for seamless fashion tech experiences.",
     },
     {
         title: "Feedback Analyzer",
         category: "NLP / Transformers",
-        stack: ["Next.js", "Express.js", "Transformers"],
+        stack: ["Python", "Transformers", "Streamlit"],
         description:
             "Automated sentiment and topic classification system. Reduced manual data processing by 80% using custom Transformer models.",
     },

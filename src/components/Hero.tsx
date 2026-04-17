@@ -1,7 +1,5 @@
-"use client";
-
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
+import { useRef, useEffect, useState } from "react";
 import { Oswald } from "next/font/google";
 import Image from "next/image";
 
@@ -21,12 +19,42 @@ export default function Hero() {
     const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
     const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
+    // Mouse tracking for spotlight effect
+    const mouseX = useMotionValue(0);
+    const mouseY = useMotionValue(0);
+
+    const springConfig = { damping: 30, stiffness: 200, mass: 0.5 };
+    const springX = useSpring(mouseX, springConfig);
+    const springY = useSpring(mouseY, springConfig);
+
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener("resize", checkMobile);
+        return () => window.removeEventListener("resize", checkMobile);
+    }, []);
+
+    const handleMouseMove = (e: React.MouseEvent) => {
+        if (!containerRef.current) return;
+        const rect = containerRef.current.getBoundingClientRect();
+        mouseX.set(e.clientX - rect.left);
+        mouseY.set(e.clientY - rect.top);
+    };
+
+    // Construct the mask image string - Sharpened for 30% solid, then quick fade
+    const maskImage = useTransform(
+        [springX, springY],
+        ([x, y]) => `radial-gradient(circle 500px at ${x}px ${y}px, black 0%, black 40%, transparent 80%)`
+    );
+
     return (
         <section
             ref={containerRef}
+            onMouseMove={handleMouseMove}
             className="h-screen w-full flex flex-col justify-center items-center px-4 md:px-12 relative overflow-hidden bg-black text-white"
         >
-            {/* Editorial Details - Top Left */}
             {/* Editorial Details - Top Left */}
             <div className="absolute top-28 md:top-10 left-4 md:left-10 z-20 text-left">
                 <span className="text-sm md:text-lg font-mono text-neutral-500 uppercase tracking-widest block">
@@ -67,29 +95,71 @@ export default function Hero() {
             <motion.div style={{ y, opacity }} className="z-10 w-full h-full flex items-center justify-center relative">
                 {/* Container for Overlapping Layout */}
                 <div className={`relative flex items-center justify-center w-full h-full ${oswald.className}`}>
-                    {/* Background Text Group - Perfectly Centered Gap */}
+                    {/* Background Text Group - Spotlight Masking */}
                     <div className="absolute inset-0 flex flex-col items-center justify-center z-0 pointer-events-none pb-[20vh] md:pb-0">
-                        <div className="flex w-full items-center justify-center">
-                            <div className="w-1/2 flex justify-end pr-0 md:pr-[4vw]">
-                                <motion.h1
-                                    initial={{ x: -50, opacity: 0 }}
-                                    animate={{ x: 0, opacity: 1 }}
-                                    transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                                    className="text-[18vw] md:text-[30vw] leading-none font-normal text-white tracking-tighter mix-blend-difference whitespace-nowrap"
-                                >
-                                    ADI
-                                </motion.h1>
+                        <div className="flex w-full items-center justify-center relative">
+                            {/* BASE LAYER (Outlined/Faded) */}
+                            <div className="flex w-full items-center justify-center">
+                                <div className="w-1/2 flex justify-end pr-0 md:pr-[4vw]">
+                                    <h1
+                                        className={`text-[18vw] md:text-[30vw] leading-none font-normal tracking-normal whitespace-nowrap ${isMobile ? "text-white" : "text-transparent opacity-30"
+                                            }`}
+                                        style={!isMobile ? { WebkitTextStroke: "2.5px rgba(255,255,255,0.45)" } : {}}
+                                    >
+                                        ADI
+                                    </h1>
+                                </div>
+                                <div className="w-1/2 flex justify-start pl-0 md:pl-[4vw]">
+                                    <h1
+                                        className={`text-[18vw] md:text-[30vw] leading-none font-normal tracking-normal whitespace-nowrap ${isMobile ? "text-white" : "text-transparent opacity-30"
+                                            }`}
+                                        style={!isMobile ? { WebkitTextStroke: "2.5px rgba(255,255,255,0.45)" } : {}}
+                                    >
+                                        TYA
+                                    </h1>
+                                </div>
                             </div>
-                            <div className="w-1/2 flex justify-start pl-0 md:pl-[4vw]">
-                                <motion.h1
-                                    initial={{ x: 50, opacity: 0 }}
-                                    animate={{ x: 0, opacity: 1 }}
-                                    transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                                    className="text-[18vw] md:text-[30vw] leading-none font-normal text-white tracking-tighter mix-blend-difference whitespace-nowrap"
+
+                            {/* REVEALED LAYER (Texture + Mask) - ONLY ON DESKTOP */}
+                            {!isMobile && (
+                                <motion.div
+                                    style={{ WebkitMaskImage: maskImage, maskImage }}
+                                    className="absolute inset-0 flex items-center justify-center z-10"
                                 >
-                                    TYA
-                                </motion.h1>
-                            </div>
+                                    <div className="flex w-full items-center justify-center relative">
+                                        {/* TEXTURE CONTENT */}
+                                        <div className="w-full h-full flex items-center justify-center">
+                                            <div className="w-1/2 flex justify-end pr-0 md:pr-[4vw]">
+                                                <h1
+                                                    className="text-[18vw] md:text-[30vw] leading-none font-normal tracking-normal whitespace-nowrap bg-cover bg-center text-transparent bg-clip-text"
+                                                    style={{ backgroundImage: 'url("/textures/brushed_metal.png")' }}
+                                                >
+                                                    ADI
+                                                </h1>
+                                            </div>
+                                            <div className="w-1/2 flex justify-start pl-0 md:pl-[4vw]">
+                                                <h1
+                                                    className="text-[18vw] md:text-[30vw] leading-none font-normal tracking-normal whitespace-nowrap bg-cover bg-center text-transparent bg-clip-text"
+                                                    style={{ backgroundImage: 'url("/textures/brushed_metal.png")' }}
+                                                >
+                                                    TYA
+                                                </h1>
+                                            </div>
+                                        </div>
+
+                                        {/* SMOKY ORANGE HEAT GLOW (Inside the mask for interaction feel) */}
+                                        <motion.div
+                                            style={{
+                                                x: springX,
+                                                y: springY,
+                                                translateX: "-50%",
+                                                translateY: "-50%",
+                                            }}
+                                            className="absolute top-0 left-0 w-[650px] h-[650px] bg-[radial-gradient(circle,rgba(255,100,20,0.4)_0%,transparent_70%)] blur-3xl mix-blend-color-dodge z-20 pointer-events-none"
+                                        />
+                                    </div>
+                                </motion.div>
+                            )}
                         </div>
 
                         {/* Mobile Description */}
@@ -136,3 +206,5 @@ export default function Hero() {
         </section>
     );
 }
+
+
