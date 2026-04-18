@@ -36,24 +36,30 @@ export default function Hero() {
         return () => window.removeEventListener("resize", checkMobile);
     }, []);
 
-    const handleMouseMove = (e: React.MouseEvent) => {
-        if (!containerRef.current) return;
-        const rect = containerRef.current.getBoundingClientRect();
-        mouseX.set(e.clientX - rect.left);
-        mouseY.set(e.clientY - rect.top);
-    };
+    // Global mouse tracking for immersive spotlight
+    useEffect(() => {
+        const handleGlobalMouseMove = (e: MouseEvent) => {
+            if (!containerRef.current) return;
+            const rect = containerRef.current.getBoundingClientRect();
+            // Track mouse even when outside the section boundary
+            mouseX.set(e.clientX - rect.left);
+            mouseY.set(e.clientY - rect.top);
+        };
 
-    // Construct the mask image string - Sharpened for 30% solid, then quick fade
+        window.addEventListener("mousemove", handleGlobalMouseMove);
+        return () => window.removeEventListener("mousemove", handleGlobalMouseMove);
+    }, [mouseX, mouseY]);
+
+    // Enhanced Mask: Smoother falloff to remove "boxy" edges
     const maskImage = useTransform(
         [springX, springY],
-        ([x, y]) => `radial-gradient(circle 500px at ${x}px ${y}px, black 0%, black 40%, transparent 80%)`
+        ([x, y]) => `radial-gradient(circle 450px at ${x}px ${y}px, black 0%, rgba(0,0,0,0.9) 20%, rgba(0,0,0,0) 70%)`
     );
 
     return (
         <section
             ref={containerRef}
-            onMouseMove={handleMouseMove}
-            className="h-screen w-full flex flex-col justify-center items-center px-4 md:px-12 relative overflow-hidden bg-black text-white"
+            className="h-screen w-full flex flex-col justify-center items-center relative overflow-hidden bg-black text-white"
         >
             {/* Editorial Details - Top Left */}
             <div className="absolute top-28 md:top-10 left-4 md:left-10 z-20 text-left">
@@ -97,36 +103,42 @@ export default function Hero() {
                 <div className={`relative flex items-center justify-center w-full h-full ${oswald.className}`}>
                     {/* Background Text Group - Spotlight Masking */}
                     <div className="absolute inset-0 flex flex-col items-center justify-center z-0 pointer-events-none pb-[20vh] md:pb-0">
-                        <div className="flex w-full items-center justify-center relative">
-                            {/* BASE LAYER (Outlined/Faded) */}
-                            <div className="flex w-full items-center justify-center">
-                                <div className="w-1/2 flex justify-end pr-0 md:pr-[4vw]">
-                                    <h1
-                                        className={`text-[18vw] md:text-[30vw] leading-none font-normal tracking-normal whitespace-nowrap ${isMobile ? "text-white" : "text-transparent opacity-30"
-                                            }`}
-                                        style={!isMobile ? { WebkitTextStroke: "2.5px rgba(255,255,255,0.45)" } : {}}
-                                    >
-                                        ADI
-                                    </h1>
-                                </div>
-                                <div className="w-1/2 flex justify-start pl-0 md:pl-[4vw]">
-                                    <h1
-                                        className={`text-[18vw] md:text-[30vw] leading-none font-normal tracking-normal whitespace-nowrap ${isMobile ? "text-white" : "text-transparent opacity-30"
-                                            }`}
-                                        style={!isMobile ? { WebkitTextStroke: "2.5px rgba(255,255,255,0.45)" } : {}}
-                                    >
-                                        TYA
-                                    </h1>
+                            <div className="flex w-full h-full items-center justify-center relative">
+                                {/* BASE LAYER (Outlined/Faded) */}
+                                <div className="flex w-full h-full items-center justify-center">
+                                    <div className="w-1/2 flex justify-end pr-0 md:pr-[4vw]">
+                                        <h1
+                                            className={`text-[18vw] md:text-[30vw] leading-none font-normal tracking-normal whitespace-nowrap ${isMobile ? "text-white" : "text-transparent opacity-30"
+                                                }`}
+                                            style={!isMobile ? { WebkitTextStroke: "2.5px rgba(255,255,255,0.45)" } : {}}
+                                        >
+                                            ADI
+                                        </h1>
+                                    </div>
+                                    <div className="w-1/2 flex justify-start pl-0 md:pl-[4vw]">
+                                        <h1
+                                            className={`text-[18vw] md:text-[30vw] leading-none font-normal tracking-normal whitespace-nowrap ${isMobile ? "text-white" : "text-transparent opacity-30"
+                                                }`}
+                                            style={!isMobile ? { WebkitTextStroke: "2.5px rgba(255,255,255,0.45)" } : {}}
+                                        >
+                                            TYA
+                                        </h1>
+                                    </div>
                                 </div>
                             </div>
 
                             {/* REVEALED LAYER (Texture + Mask) - ONLY ON DESKTOP */}
                             {!isMobile && (
                                 <motion.div
-                                    style={{ WebkitMaskImage: maskImage, maskImage }}
-                                    className="absolute inset-0 flex items-center justify-center z-10"
+                                    style={{ 
+                                        WebkitMaskImage: maskImage, 
+                                        maskImage,
+                                        WebkitMaskRepeat: "no-repeat",
+                                        maskRepeat: "no-repeat"
+                                    }}
+                                    className="absolute inset-0 z-10"
                                 >
-                                    <div className="flex w-full items-center justify-center relative">
+                                    <div className="w-full h-full flex items-center justify-center relative">
                                         {/* TEXTURE CONTENT */}
                                         <div className="w-full h-full flex items-center justify-center">
                                             <div className="w-1/2 flex justify-end pr-0 md:pr-[4vw]">
@@ -147,20 +159,19 @@ export default function Hero() {
                                             </div>
                                         </div>
 
-                                        {/* SMOKY ORANGE HEAT GLOW (Inside the mask for interaction feel) */}
+                                        {/* SMOKY ORANGE HEAT GLOW - Blur removed to prevent edge clipping artifacts */}
                                         <motion.div
                                             style={{
-                                                x: springX,
-                                                y: springY,
-                                                translateX: "-50%",
-                                                translateY: "-50%",
+                                                background: useTransform(
+                                                    [springX, springY],
+                                                    ([x, y]) => `radial-gradient(circle 600px at ${x}px ${y}px, rgba(255,100,20,0.35) 0%, rgba(255,100,20,0.1) 30%, transparent 70%)`
+                                                ),
                                             }}
-                                            className="absolute top-0 left-0 w-[650px] h-[650px] bg-[radial-gradient(circle,rgba(255,100,20,0.4)_0%,transparent_70%)] blur-3xl mix-blend-color-dodge z-20 pointer-events-none"
+                                            className="absolute inset-0 z-20 pointer-events-none mix-blend-color-dodge"
                                         />
                                     </div>
                                 </motion.div>
                             )}
-                        </div>
 
                         {/* Mobile Description */}
                         <motion.p

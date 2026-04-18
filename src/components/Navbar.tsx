@@ -42,10 +42,10 @@ export default function Navbar() {
                 <div className="flex items-center gap-3 justify-start">
                     <div className="relative w-10 h-10 rounded-full overflow-hidden border border-white/10">
                         <Image
-                            src="/profile-new.jpg"
-                            alt="Aditya Havaldar"
+                            src="/monogram.png"
+                            alt="Aditya Havaldar Logo"
                             fill
-                            className="object-cover"
+                            className="object-contain"
                         />
                     </div>
                     <span className="text-white font-bold tracking-tight">
