@@ -89,7 +89,7 @@ export default function About() {
                     <div className="flex items-center gap-4 text-white font-medium">
                         <a href="#contact" className="hover:text-cyan-400 transition-colors">Let&apos;s Connect</a>
                         <span className="text-neutral-700">|</span>
-                        <a href="/resume.pdf" target="_blank" className="hover:text-cyan-400 transition-colors">Resume</a>
+                        <a href="/resume.pdf?v=2" target="_blank" className="hover:text-cyan-400 transition-colors">Resume</a>
                     </div>
                 </motion.div>
             </motion.div>
