@@ -132,6 +132,8 @@ export default function EducationAchievements() {
                             className="relative h-[420px] overflow-hidden"
                             onMouseEnter={() => setIsHovered(true)}
                             onMouseLeave={() => setIsHovered(false)}
+                            onTouchStart={() => setIsHovered(true)}
+                            onTouchEnd={() => setIsHovered(false)}
                         >
                             {/* Vertical Gradient Masks */}
                             <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-black to-transparent z-10 pointer-events-none" />
