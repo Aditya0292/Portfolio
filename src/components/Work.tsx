@@ -6,6 +6,13 @@ import { useState } from "react";
 
 const projects = [
     {
+        title: "Adhikar साथी",
+        category: "LegalTech / AI",
+        stack: ["React", "TypeScript", "FastAPI", "Supabase", "Google Maps"],
+        description:
+            "Production-grade AI legal platform bridging India's justice gap with 10-language voice support, RAG citations, and advocate dashboards.",
+    },
+    {
         title: "NeuroFlow",
         category: "EdTech / AI",
         stack: ["Next.js 14", "TypeScript", "Tailwind CSS", "Gemini 2.0"],

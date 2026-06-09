@@ -9,15 +9,8 @@ export default function Preloader() {
     const [isVisible, setIsVisible] = useState(true);
 
     useEffect(() => {
-        // Check if preloader has already run in this session
-        const hasLoaded = sessionStorage.getItem("hasLoaded");
-        if (hasLoaded) {
-            setIsVisible(false);
-            return;
-        }
-
-        const duration = 4500; // 4.5 seconds
-        const interval = 30;
+        const duration = 2000; // 2 seconds
+        const interval = 25;
         const steps = duration / interval;
         const increment = 100 / steps;
 
@@ -28,8 +21,7 @@ export default function Preloader() {
                     clearInterval(timer);
                     setTimeout(() => {
                         setIsVisible(false);
-                        sessionStorage.setItem("hasLoaded", "true");
-                    }, 800);
+                    }, 500);
                     return 100;
                 }
                 return next;
@@ -39,18 +31,13 @@ export default function Preloader() {
         return () => clearInterval(timer);
     }, []);
 
-    // If invisible and loaded, return null to avoid exit animation loop
-    if (!isVisible && typeof window !== 'undefined' && sessionStorage.getItem("hasLoaded")) {
-        return null;
-    }
-
     return (
         <AnimatePresence>
             {isVisible && (
                 <motion.div
                     initial={{ y: 0 }}
                     exit={{ y: "-100%" }}
-                    transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}
+                    transition={{ duration: 1.0, ease: [0.76, 0, 0.24, 1] }}
                     className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#050505] text-white"
                     style={{ perspective: 1000 }}
                 >
@@ -60,7 +47,7 @@ export default function Preloader() {
                             initial={{ rotateY: 0, opacity: 1 }}
                             animate={{ rotateY: 360 }}
                             transition={{
-                                duration: 2.5,
+                                duration: 1.8,
                                 ease: "easeInOut",
                                 repeat: Infinity,
                             }}

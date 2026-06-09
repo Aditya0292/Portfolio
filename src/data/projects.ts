@@ -1,5 +1,35 @@
 export const projects = [
     {
+        id: "adhikar-saathi",
+        title: "Adhikar साथी",
+        category: "LegalTech / AI",
+        slug: "adhikar-saathi",
+        achievement: "Live in Production",
+        description: "Adhikar साथी is a production-grade AI legal platform bridging India's justice gap. Citizens ask legal questions in 10 regional languages and receive cited, verified answers grounded in real Indian statutes. Verified advocates get a professional dashboard to manage client requests, consultations, and reviews.\n\nBuilt the complete frontend, system architecture, GPS advocate discovery with Google Maps, multilingual voice interface, advocate registration and verification flow, and full production deployment on Vercel + Render.",
+        techStack: [
+            "React 18",
+            "TypeScript",
+            "FastAPI",
+            "Supabase",
+            "Google Maps API",
+            "Docker",
+            "Vercel",
+            "Redis",
+            "System Design",
+            "AI Integration"
+        ],
+        githubUrl: "https://github.com/Aditya0292/Adhikar-saathi",
+        demoUrl: "https://adhikar-saathi.vercel.app/",
+        image: "/projects/adhikar-saathi/landing.png",
+        images: [
+            "/projects/adhikar-saathi/landing.png",
+            "/projects/adhikar-saathi/dashboard.png",
+            "/projects/adhikar-saathi/advocate_discovery.png",
+            "/projects/adhikar-saathi/advocate_registration.png",
+            "/projects/adhikar-saathi/doc_scanner.png",
+        ],
+    },
+    {
         id: "neuroflow",
         title: "NeuroFlow",
         category: "EdTech / AI",
